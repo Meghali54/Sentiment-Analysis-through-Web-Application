@@ -3,12 +3,10 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import requests
-from vaderSentiment import SentimentIntensityAnalyzer
-import base64
-from io import BytesIO
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer  # FIXED IMPORT
 import nltk
 
-# ✅ Ensure VADER lexicon is available
+# Download VADER lexicon only if not present
 nltk.download('vader_lexicon', quiet=True)
 
 st.markdown("""
@@ -51,19 +49,21 @@ if apiKey and search_query:
     def analyze_sentiment(texts, model):
         results = []
         analyzer = SentimentIntensityAnalyzer()
-        for text in texts:
-            if model.lower() == 'vader':
+        if model.lower() == 'vader':
+            for text in texts:
                 score = analyzer.polarity_scores(text)['compound']
                 if score >= 0.05: sentiment = 'Positive'
                 elif score <= -0.05: sentiment = 'Negative'
                 else: sentiment = 'Neutral'
-            else:
-                from textblob import TextBlob
+                results.append(sentiment)
+        else:
+            from textblob import TextBlob  # Import inside function for faster cold start
+            for text in texts:
                 polarity = TextBlob(text).sentiment.polarity
                 if polarity > 0.05: sentiment = 'Positive'
                 elif polarity < -0.05: sentiment = 'Negative'
                 else: sentiment = 'Neutral'
-            results.append(sentiment)
+                results.append(sentiment)
         return results
 
     df['sentiment'] = analyze_sentiment(df['text'], selected_model)
@@ -115,7 +115,7 @@ if apiKey and search_query:
     # ---------------- Word Clouds ----------------
     @st.cache_data(show_spinner=False)
     def generate_wordcloud(texts):
-        from wordcloud import WordCloud
+        from wordcloud import WordCloud  # Import inside function for faster cold start
         from io import BytesIO
         import base64
         if not texts: return None
