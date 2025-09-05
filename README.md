@@ -28,7 +28,7 @@ This project is a dashboard for analyzing the sentiment of news headlines of our
 
 **Models Used:**
 - VADER (Valence Aware Dictionary and sEntiment Reasoner)
-- TextBlob (optional)
+- TextBlob
 
 **Why VADER?**
 - Designed for short texts and social media
@@ -93,25 +93,3 @@ This project is licensed under the MIT License. See LICENSE for more information
 ## Contributing
 
 Contributions are always welcome! If you have any suggestions or would like to add features, please open an issue or create a pull request.
-
-- Clone the repository:
-    ```
-    git clone https://github.com/hipnologo/sentiment-analysis-worldnews.git
-    ```
-
-- Install the required packages:
-    ```
-    pip install -r requirements.txt
-    ```
-
-- Run the script:
-    ```
-    streamlit run app.py
-    ```
-
-- Wait for the news or tweets to load from the API.
-
-- Select a news source or hashtag from the sidebar to filter the headlines or tweets and see the sentiment analysis score for that source or hashtag.
-
-- The dashboard will display a table of the news headlines or tweets and their sentiment scores.
-
