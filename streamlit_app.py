@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import requests
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from vaderSentiment import SentimentIntensityAnalyzer
 import base64
 from io import BytesIO
 import nltk
