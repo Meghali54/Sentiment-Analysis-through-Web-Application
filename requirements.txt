@@ -8,5 +8,3 @@ plotly==5.22.0
 wordcloud==1.9.3
 textblob==0.17.1
 
-
-
